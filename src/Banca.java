@@ -45,9 +45,9 @@ public class Banca extends Menu {
                 cliente=clients.load(dni);
                 if (cliente!=null) System.out.println("O cliente xa existe: "+cliente);
                 else {
-                    nome=Utilidades.getString("Nome:");
-                    apelidos=Utilidades.getString("Apelidos:");
-                    data=Utilidades.getData("Data nacemento");
+                    nome=Utilidades.getString("Nome: ");
+                    apelidos=Utilidades.getString("Apelidos: ");
+                    data=Utilidades.getData("Data nacemento: ");
                     cliente=new Cliente(dni,nome,apelidos,data);
                     clients.save(cliente);
                 }
