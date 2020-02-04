@@ -148,6 +148,8 @@ public class Banca extends Menu {
                 comision=Utilidades.getDouble("Comisión de mantemento: ");
                 conta=new ContaBancariaCorrentePersoal(cliente,ccc,comision);
                 break;
+            case '*':
+                throw new Exception("Operación cancelada");
         }
         return conta;
     }
