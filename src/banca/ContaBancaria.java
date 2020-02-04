@@ -72,7 +72,47 @@ public abstract class ContaBancaria implements Gardable <String> {
      * @return 
      */
     public static boolean verificaCCC(String ccc) {
-        return true;
+        int[] pd={4,8,5,10};
+        int[] sd={9,7,3,6};
+        int[] cc={1,2,4,8,5,10,9,7,3,6};
+        int firstcd=0;
+        int secondcd=0;
+        String banco;
+        String sucursal;
+        String control;
+        String cuenta;
+        
+        if (ccc.length()!=20) return false;
+        banco=ccc.substring(0,4);
+        sucursal=ccc.substring(4,8);
+        control=ccc.substring(8,10);
+        cuenta=ccc.substring(10);
+        
+        // Son números
+        try {
+            Integer.parseInt(banco);
+            Integer.parseInt(sucursal);
+            Integer.parseInt(control);
+            Integer.parseInt(cuenta);
+        } catch(NumberFormatException ex) {
+            return false;
+        }
+        
+        // Calculo control
+        for(int idx=0;idx<10;idx++) {
+            if (idx<4) {
+                firstcd+=Character.digit(banco.charAt(idx),10)*pd[idx];
+                firstcd+=Character.digit(sucursal.charAt(idx),10)*sd[idx];
+            }
+            secondcd+=Character.digit(cuenta.charAt(idx),10)*cc[idx];
+        }
+        firstcd=11-(firstcd%11);
+        if (firstcd > 9) firstcd=11-firstcd;
+        secondcd=11-(secondcd%11);
+        if (secondcd > 9) secondcd=11-secondcd;
+        
+        // Resultado
+        return (firstcd==Character.digit(control.charAt(0),10)) && (secondcd==Character.digit(control.charAt(1),10));
     }
     
     @Override
