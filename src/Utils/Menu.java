@@ -1,6 +1,5 @@
 package Utils;
 
-import Utils.Utilidades;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -64,7 +63,7 @@ public abstract class Menu {
     /**
      * Método abstracto a implementar.Realizará as accións correspondentes a cada opción
      * @param opc - Opción a xestionar
-     * @return 
+     * @return true indica que o menú debe finalizar, false se continúa no menú.
      * @throws java.lang.Exception
      */
     public abstract boolean menu(int opc) throws Exception;   

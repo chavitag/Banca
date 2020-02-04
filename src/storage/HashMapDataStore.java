@@ -19,11 +19,13 @@ public abstract class HashMapDataStore <K,T extends Gardable<K>> implements Data
 
     @Override
     public void save(T object) throws DataStoreException {
+        if (lista.get(object.getKey())!=null) throw new DataStoreException("Error Save Already Exists");
         lista.put(object.getKey(), object);
     }
     
     @Override
     public void update(T object) throws DataStoreException {
+        if (lista.get(object.getKey())==null) throw new DataStoreException("Error Update Not Exists");
         lista.put(object.getKey(), object);
     }
 

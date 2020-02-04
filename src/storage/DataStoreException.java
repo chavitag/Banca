@@ -10,5 +10,9 @@ package storage;
  * @author xavi
  */
 public class DataStoreException extends Exception {
+    DataStoreException() {}
     
+    DataStoreException(String msg) {
+        super(msg);
+    }
 }
