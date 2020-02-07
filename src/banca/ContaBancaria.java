@@ -1,8 +1,9 @@
 package banca;
 
+import java.io.Serializable;
 import storage.Gardable;
 
-public abstract class ContaBancaria implements Gardable <String> {
+public abstract class ContaBancaria implements Serializable,Gardable <String> {
     private final Cliente cliente;
     private final String ccc;
     private double saldo;

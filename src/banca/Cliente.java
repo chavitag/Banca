@@ -6,6 +6,7 @@
 package banca;
 
 import Utils.Utilidades;
+import java.io.Serializable;
 import java.util.Calendar;
 import storage.Gardable;
 
@@ -13,7 +14,7 @@ import storage.Gardable;
  *
  * @author xavi
  */
-public class Cliente implements Gardable <String> {
+public class Cliente implements Serializable,Gardable <String> {
     private String dni;
     private String nome;
     private String apelidos;
