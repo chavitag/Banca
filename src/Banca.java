@@ -85,7 +85,7 @@ public class Banca extends Menu {
             case 5:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
                 conta=contas.load(ccc);
-                if (conta!=null) System.out.println(conta);
+                if (conta!=null) System.out.println(conta.details());
                 else System.out.println("A conta "+ccc+" non existe");
                 break;
                 
