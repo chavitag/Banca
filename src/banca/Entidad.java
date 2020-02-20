@@ -12,13 +12,13 @@ import java.util.HashMap;
  *
  * @author xavi
  */
-class Entidad {
+public class Entidad {
     private final String codigo;
     private final String nome;
     private double max_autorizado;
-    public final HashMap <String,Domiciliacion> domiciliaciones=new HashMap<>();    
+    private final HashMap <String,Domiciliacion> domiciliaciones=new HashMap<>();    
     
-    Entidad(String codigo,String nome,double max_autorizado) {
+    public Entidad(String codigo,String nome,double max_autorizado) {
         this.codigo=codigo;
         this.nome=nome;
         this.max_autorizado=max_autorizado;
@@ -61,6 +61,10 @@ class Entidad {
             result+="\t"+d+"\n";
         }
         return result;
+    }
+    
+    public HashMap <String,Domiciliacion> getDomiciliaciones() {
+        return domiciliaciones;
     }
     
     @Override

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca.data.randomaccessfileserialized;
 
+import banca.AplicacionBanca;
+import banca.Cliente;
 import storage.By;
 import storage.RandomAccessFileSerializeDataStore;
 

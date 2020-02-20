@@ -9,7 +9,7 @@ package banca;
  *
  * @author xavi
  */
-class Domiciliacion {
+public class Domiciliacion {
     private final String codigo;
     private final String concepto;
 

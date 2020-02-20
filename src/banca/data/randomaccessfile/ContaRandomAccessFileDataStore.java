@@ -3,8 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca.data.randomaccessfile;
 
+import banca.AplicacionBanca;
+import banca.Cliente;
+import banca.ContaBancaria;
+import banca.ContaBancariaAforro;
+import banca.ContaBancariaCorrente;
+import banca.ContaBancariaCorrenteEmpresa;
+import banca.ContaBancariaCorrentePersoal;
+import banca.Domiciliacion;
+import banca.Entidad;
+import banca.data.randomaccessfile.ClienteRandomAccessFileDataStore;
+import banca.data.BancaBy;
+import banca.data.BancaBy;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -17,6 +29,7 @@ import storage.RandomAccessFileDataStore;
  * @author xavi
  */
 public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <String,ContaBancaria>{
+    private final String AUTORIZADOSNAME="Autorizados.dat";
     private enum TipoConta {AFORRO,EMPRESA,PERSOAL};
     RandomAccessFile autorizados=null;
     
@@ -116,8 +129,8 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
     }
     
     private void writeAutorizados(ContaBancariaCorrente conta) throws IOException {
-        Collection <Entidad> lista=conta.listaAutorizados.values();
-        autorizados=new RandomAccessFile(conta.getCcc()+"-"+AplicacionBanca.AUTORIZADOS_FILENAME,"rw");
+        Collection <Entidad> lista=conta.getAutorizados().values();
+        autorizados=new RandomAccessFile(conta.getCcc()+"-"+AUTORIZADOSNAME,"rw");
         try {
             autorizados.setLength(0);
             for(Entidad e: lista) {
@@ -130,7 +143,7 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
     }
     
     private void writeEntidad(Entidad e) throws IOException {
-        Collection <Domiciliacion> lista=e.domiciliaciones.values();
+        Collection <Domiciliacion> lista=e.getDomiciliaciones().values();
         autorizados.writeUTF(e.getCodigo());
         autorizados.writeUTF(e.getNome());
         autorizados.writeDouble(e.getMax_autorizado());
@@ -142,7 +155,7 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
     }
     
     private void readAutorizados(ContaBancariaCorrente conta) throws IOException {
-        autorizados=new RandomAccessFile(conta.getCcc()+"-"+AplicacionBanca.AUTORIZADOS_FILENAME,"r");
+        autorizados=new RandomAccessFile(conta.getCcc()+"-"+AUTORIZADOSNAME,"r");
         Entidad e;
         try {
             do {

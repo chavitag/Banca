@@ -179,9 +179,7 @@ public class Utilidades {
      */
     public static void showArray(Collection al) {
         for(Object obj: al) {
-            System.out.println("-------------------------------------------");
             System.out.println(obj);
-            System.out.println("-------------------------------------------");
         }
     }    
 }

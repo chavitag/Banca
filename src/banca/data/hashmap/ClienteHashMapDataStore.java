@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca.data.hashmap;
 
+import banca.Cliente;
 import java.util.Collection;
 import storage.By;
 import storage.HashMapDataStore;

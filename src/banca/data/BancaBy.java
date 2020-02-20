@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banca;
+package banca.data;
 
 import storage.By;
 
