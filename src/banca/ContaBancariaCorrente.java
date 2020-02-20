@@ -12,7 +12,7 @@ import java.util.HashMap;
  * @author xavi
  */
 public abstract class ContaBancariaCorrente extends ContaBancaria {
-    private final HashMap <String,Entidad> listaAutorizados=new HashMap<>();
+    final HashMap <String,Entidad> listaAutorizados=new HashMap<>();
     
     public ContaBancariaCorrente(Cliente cliente,String ccc) {
         super(cliente,ccc);

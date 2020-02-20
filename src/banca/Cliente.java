@@ -115,7 +115,7 @@ public class Cliente implements Serializable,Gardable <String> {
     }
     
     public String details() {
-        String info=this+"\n Data Nacemento: "+Utilidades.strData(data_nacemento);
+        String info=this+"\n\tData Nacemento: "+Utilidades.strData(data_nacemento);
         return info;
     }
     

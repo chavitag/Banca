@@ -5,11 +5,6 @@
  */
 package banca;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import serializator.Serializator;
 import storage.By;
 import storage.RandomAccessFileSerializeDataStore;
 
@@ -19,40 +14,18 @@ import storage.RandomAccessFileSerializeDataStore;
  */
 public class ContaRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,ContaBancaria>{
 
-    public ContaRandomAccessFileSerializeDataStore(String filename) {
-        super(filename);
-    }
-    
-    @Override
-    public ContaBancaria loadBy(By c, Object info) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ContaRandomAccessFileSerializeDataStore() {
+        super(AplicacionBanca.CONTAS_FILENAME);
     }
 
     @Override
-    public Collection<ContaBancaria> loadAllBy(By c, Object info) {
-        Collection <ContaBancaria> result=null;
-        ContaBancaria cb;
-        String data;
+    protected boolean filter(By c, Object info, ContaBancaria data) {
         BancaBy by=(BancaBy) c;
         switch(by) {
             case DNI:
-                if (!(info instanceof String)) return null;
-                result=new ArrayList <>();
-                try {
-                    open();
-                    do {
-                        data=ras.readUTF(); // Si e fin de ficheiro ou non lee un String lanza unha Exception
-                        cb=Serializator.unserialize(data);
-                        if (cb.getCliente().getDni().equals((String)info)) result.add(cb);
-                    } while(true);
-                } catch (EOFException e) { 
-                } catch (IOException | ClassNotFoundException e) {
-                    result=null;
-                } finally {
-                    try { close(); } catch(Exception e) {};
-                }
+                if ((info instanceof String) &&(data.getCliente().getDni().equals((String)info))) return true;
                 break;
         }
-        return result;
+        return false;
     }
 }

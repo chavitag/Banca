@@ -5,6 +5,7 @@
  */
 package banca;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -42,10 +43,28 @@ class Entidad {
         return nome;
     }
 
+    public double getMax_autorizado() {
+        return max_autorizado;
+    }
+    
     /**
      * @param max_autorizado the max_autorizado to set
      */
     public void setMax_autorizado(double max_autorizado) {
         this.max_autorizado = max_autorizado;
+    }
+    
+    public String details() {
+        String result=this+"\nLista de Recibos:\n\t";
+        Collection <Domiciliacion> list=domiciliaciones.values();
+        for(Domiciliacion d: list) {
+            result+="\t"+d+"\n";
+        }
+        return result;
+    }
+    
+    @Override
+    public String toString() {
+        return codigo+" - "+nome+" (Max Autorizado "+max_autorizado+"€)";
     }
 }

@@ -5,7 +5,6 @@
  */
 package banca;
 
-import java.util.Collection;
 import storage.By;
 import storage.RandomAccessFileSerializeDataStore;
 
@@ -15,18 +14,12 @@ import storage.RandomAccessFileSerializeDataStore;
  */
 public class ClienteRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,Cliente> {
 
-    public ClienteRandomAccessFileSerializeDataStore(String filename) {
-        super(filename);
-    }
-    
-    @Override
-    public Cliente loadBy(By c, Object info) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ClienteRandomAccessFileSerializeDataStore() {
+        super(AplicacionBanca.CLIENTES_FILENAME);
     }
 
     @Override
-    public Collection<Cliente> loadAllBy(By c, Object info) {
+    protected boolean filter(By c, Object info, Cliente data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }

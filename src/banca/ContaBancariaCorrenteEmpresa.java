@@ -14,14 +14,14 @@ public class ContaBancariaCorrenteEmpresa extends ContaBancariaCorrente {
     private double tipod;
     private double comision;
     
-    public ContaBancariaCorrenteEmpresa(Cliente cliente,String ccc) {
+    public ContaBancariaCorrenteEmpresa(Cliente cliente,String ccc) throws Exception {
         super(cliente,ccc);
         this.descuberto=0;
         this.tipod=0;
         this.comision=0;
     }
 
-    public ContaBancariaCorrenteEmpresa(Cliente cliente,String ccc,double descuberto,double tipod,double comision) {
+    public ContaBancariaCorrenteEmpresa(Cliente cliente,String ccc,double descuberto,double tipod,double comision)  {
         super(cliente,ccc);
         this.descuberto=descuberto;
         this.tipod=tipod/100;
@@ -95,7 +95,7 @@ public class ContaBancariaCorrenteEmpresa extends ContaBancariaCorrente {
     public String details() {
         return  "CONTA CORRENTE EMPRESARIAL\n"+
                 "--------------------------\n"+
-                "Datos do Cliente:\n"+
+                "Datos do Cliente:\n\t"+
                 getCliente().details()+
                 "\nDatos da Conta:\n\t"+super.toString()+": \n"+
                 "\tMáximo Descuberto: "+descuberto+"€"+

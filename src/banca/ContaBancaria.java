@@ -8,7 +8,8 @@ public abstract class ContaBancaria implements Serializable,Gardable <String> {
     private final String ccc;
     private double saldo;
     
-    ContaBancaria(Cliente cliente,String ccc) {
+    ContaBancaria(Cliente cliente,String ccc)  {
+        if (!verificaCCC(ccc)) throw new IllegalArgumentException("Error Núemero de Conta");
         this.cliente=cliente;
         this.ccc=ccc;
         this.saldo=0;
@@ -94,7 +95,7 @@ public abstract class ContaBancaria implements Serializable,Gardable <String> {
             Integer.parseInt(banco);
             Integer.parseInt(sucursal);
             Integer.parseInt(control);
-            Integer.parseInt(cuenta);
+            Long.parseLong(cuenta);
         } catch(NumberFormatException ex) {
             return false;
         }
@@ -111,7 +112,6 @@ public abstract class ContaBancaria implements Serializable,Gardable <String> {
         if (firstcd > 9) firstcd=11-firstcd;
         secondcd=11-(secondcd%11);
         if (secondcd > 9) secondcd=11-secondcd;
-        
         // Resultado
         return (firstcd==Character.digit(control.charAt(0),10)) && (secondcd==Character.digit(control.charAt(1),10));
     }

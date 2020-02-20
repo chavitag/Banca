@@ -3,7 +3,7 @@ package banca;
 public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
     private double comision;
     
-    public ContaBancariaCorrentePersoal(Cliente cliente,String ccc) {
+    public ContaBancariaCorrentePersoal(Cliente cliente,String ccc)  {
         super(cliente,ccc);
         this.comision=0;
     }
@@ -37,9 +37,9 @@ public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
     public String details() {
         return  "CONTA CORRENTE PERSOAL\n"+
                 "--------------------------\n"+
-                "Datos do Cliente:\n"+
+                "Datos do Cliente:\n\t"+
                 getCliente().details()+
-                "\nDatos da Conta:\n\t"+super.toString()+": \n"+
+                "\nDatos da Conta:\n\t"+super.toString()+"\n"+
                 "\tComisión Anual: "+comision+"€";
     }
 

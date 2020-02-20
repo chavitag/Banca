@@ -18,4 +18,16 @@ class Domiciliacion {
         this.concepto=concepto;
     }
     
+    public String getCodigo() {
+        return codigo;
+    }
+    
+    public String getConcepto() {
+        return concepto;
+    }
+    
+    @Override
+    public String toString() {
+        return codigo+": "+concepto;
+    }
 }

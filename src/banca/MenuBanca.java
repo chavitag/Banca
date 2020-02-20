@@ -1,28 +1,15 @@
-import banca.ContaHashMapDataStore;
+package banca;
+
 import Utils.Menu;
 import Utils.Utilidades;
-import banca.BancaBy;
-import banca.ContaBancaria;
-import banca.Cliente;
-import banca.ClienteHashMapDataStore;
-import banca.ClienteRandomAccessFileSerializeDataStore;
-import banca.ContaBancariaAforro;
-import banca.ContaBancariaCorrenteEmpresa;
-import banca.ContaBancariaCorrentePersoal;
-import banca.ContaRandomAccessFileSerializeDataStore;
 import java.util.Calendar;
 import java.util.Collection;
-import storage.DataStore;
 
-public class Banca extends Menu {
-    //public static DataStore <String,ContaBancaria> contas=new ContaHashMapDataStore ();
-    //public static DataStore <String,Cliente> clients=new ClienteHashMapDataStore ();
-    public static DataStore <String,ContaBancaria> contas=new ContaRandomAccessFileSerializeDataStore("Contas.dat");
-    public static DataStore <String,Cliente> clients=new ClienteRandomAccessFileSerializeDataStore("Clientes.dat");
+public class MenuBanca extends Menu {
     
-    Banca() {
+    public MenuBanca() {
         super(new String[]{ "Abrir unha nova conta","Ver listado de clientes","Ver listado das contas dispoñibles",
-                            "Listado de contas dun cliente","Obter os datos dunha conta",
+                            "Listado de contas dun cliente","Ver Datos de Conta",
                             "Realizar ingreso","Retirar efectivo",
                             "Consultar saldo","Saír"});
     }
@@ -46,57 +33,64 @@ public class Banca extends Menu {
                 System.out.println("Cliente:");
                 dni=Utilidades.getString("DNI: ");
                 if (!Cliente.verificaDNI(dni)) throw new Exception("DNI erróneo");
-                cliente=clients.load(dni);
+                cliente=AplicacionBanca.clients.load(dni);
                 if (cliente!=null) System.out.println("O cliente xa existe: "+cliente);
                 else {
                     nome=Utilidades.getString("Nome: ");
                     apelidos=Utilidades.getString("Apelidos: ");
                     data=Utilidades.getData("Data nacemento: ");
                     cliente=new Cliente(dni,nome,apelidos,data);
-                    clients.save(cliente);
+                    AplicacionBanca.clients.save(cliente);
                 }
                 System.out.println("Datos da Conta:");
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
                 if (!ContaBancaria.verificaCCC(ccc)) throw new Exception("Número de Conta erróneo");
-                if (contas.load(ccc)!=null) throw new Exception("A conta xa existe");
+                if (AplicacionBanca.contas.load(ccc)!=null) throw new Exception("A conta xa existe");
                 choose=Utilidades.choose("Conta de A(f)orro, Conta Corrente (E)mpresa ou Conta Corrente (P)ersoal? ","FEPfep");
                 conta=contaBancariaFactory(cliente,ccc,choose);
-                contas.save(conta);
+                AplicacionBanca.contas.save(conta);
                 break;
                 
             case 2:
                 System.out.println("Lista de Clientes:");
-                Utilidades.showArray(clients.loadAll());
+                Utilidades.showArray(AplicacionBanca.clients.loadAll());
                 break;
                 
             case 3:
-                lista=contas.loadAll();
+                lista=AplicacionBanca.contas.loadAll();
                 System.out.println("Lista de Contas:");
                 Utilidades.showArray(lista);
                 break;
                 
             case 4:
                 dni=Utilidades.getString("DNI: ");
-                lista=contas.loadAllBy(BancaBy.DNI, dni);
+                lista=AplicacionBanca.contas.loadAllBy(BancaBy.DNI, dni);
                 System.out.println("Listado de contas do Cliente "+dni);
                 Utilidades.showArray(lista);
                 break;
             
             case 5:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=contas.load(ccc);
-                if (conta!=null) System.out.println(conta.details());
+                conta=AplicacionBanca.contas.load(ccc);
+                if (conta!=null) {
+                    System.out.println(conta.details());
+                    if (conta instanceof ContaBancariaCorrente) {
+                        choose=Utilidades.choose("Xestionar (D)omiciliacións ","Dd");
+                        if (Character.toLowerCase(choose)=='d') 
+                            new MenuContaCorrente((ContaBancariaCorrente)conta).run();
+                    }
+                }
                 else System.out.println("A conta "+ccc+" non existe");
                 break;
                 
             case 6:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=contas.load(ccc);
+                conta=AplicacionBanca.contas.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta);
                     cantidade=Utilidades.getDouble("Cantidade a Ingresar: ");
                     cantidade=conta.ingreso(cantidade);
-                    contas.update(conta);
+                    AplicacionBanca.contas.update(conta);
                     System.out.println("O novo saldo é de "+cantidade);
                 }
                 else System.out.println("A conta "+ccc+" non existe");
@@ -104,12 +98,12 @@ public class Banca extends Menu {
                 
             case 7:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=contas.load(ccc);
+                conta=AplicacionBanca.contas.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta);
                     cantidade=Utilidades.getDouble("Cantidade a Retirar: ");
                     cantidade=conta.reintegro(cantidade);
-                    contas.update(conta);
+                    AplicacionBanca.contas.update(conta);
                     System.out.println("O novo saldo é de "+cantidade);
                 }
                 else System.out.println("A conta "+ccc+" non existe");
@@ -117,7 +111,7 @@ public class Banca extends Menu {
 
             case 8:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=contas.load(ccc);
+                conta=AplicacionBanca.contas.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta.details());
                 }
@@ -156,9 +150,5 @@ public class Banca extends Menu {
                 throw new Exception("Operación cancelada");
         }
         return conta;
-    }
-
-    public static void main(String[] args) {
-        new Banca().run();
     }
 }

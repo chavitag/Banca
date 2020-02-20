@@ -31,7 +31,7 @@ public class ContaBancariaAforro extends ContaBancaria {
     public String details() {
         return  "CONTA DE AFORRO\n"+
                 "-------------------\n"+
-                "Datos do Cliente:\n"+
+                "Datos do Cliente:\n\t"+
                 getCliente().details()+
                 "\nDatos da Conta:\n\t"+super.toString()+": \n"+
                 "\tTipo de Interés: "+getTipo()+"%";
