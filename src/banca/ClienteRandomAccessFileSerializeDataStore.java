@@ -7,15 +7,15 @@ package banca;
 
 import java.util.Collection;
 import storage.By;
-import storage.RandomAccessFileDataStore;
+import storage.RandomAccessFileSerializeDataStore;
 
 /**
  *
  * @author xavi
  */
-public class ClienteRandomAccessFileDataStore extends RandomAccessFileDataStore <String,Cliente> {
+public class ClienteRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,Cliente> {
 
-    public ClienteRandomAccessFileDataStore(String filename) {
+    public ClienteRandomAccessFileSerializeDataStore(String filename) {
         super(filename);
     }
     

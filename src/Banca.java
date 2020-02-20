@@ -5,11 +5,11 @@ import banca.BancaBy;
 import banca.ContaBancaria;
 import banca.Cliente;
 import banca.ClienteHashMapDataStore;
-import banca.ClienteRandomAccessFileDataStore;
+import banca.ClienteRandomAccessFileSerializeDataStore;
 import banca.ContaBancariaAforro;
 import banca.ContaBancariaCorrenteEmpresa;
 import banca.ContaBancariaCorrentePersoal;
-import banca.ContaRandomAccessFileDataStore;
+import banca.ContaRandomAccessFileSerializeDataStore;
 import java.util.Calendar;
 import java.util.Collection;
 import storage.DataStore;
@@ -17,8 +17,8 @@ import storage.DataStore;
 public class Banca extends Menu {
     //public static DataStore <String,ContaBancaria> contas=new ContaHashMapDataStore ();
     //public static DataStore <String,Cliente> clients=new ClienteHashMapDataStore ();
-    public static DataStore <String,ContaBancaria> contas=new ContaRandomAccessFileDataStore("Contas.dat");
-    public static DataStore <String,Cliente> clients=new ClienteRandomAccessFileDataStore("Clientes.dat");
+    public static DataStore <String,ContaBancaria> contas=new ContaRandomAccessFileSerializeDataStore("Contas.dat");
+    public static DataStore <String,Cliente> clients=new ClienteRandomAccessFileSerializeDataStore("Clientes.dat");
     
     Banca() {
         super(new String[]{ "Abrir unha nova conta","Ver listado de clientes","Ver listado das contas dispoñibles",

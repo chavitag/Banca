@@ -22,32 +22,29 @@ import serializator.Serializator;
  * @param <K>
  * @param <T>
  */
-public abstract class RandomAccessFileDataStore <K,T extends Serializable & Gardable<K>> implements DataStore <K, T>  {
+public abstract class RandomAccessFileSerializeDataStore <K,T extends Serializable & Gardable<K>> implements DataStore <K, T>  {
     protected final String filename;
     protected RandomAccessFile ras;
     protected long position;
     
-    public RandomAccessFileDataStore(String filename) {
+    public RandomAccessFileSerializeDataStore(String filename) {
         this.filename=filename;
     }
     
     @Override
     public void save(T object) throws DataStoreException {
         if (load(object.getKey()) != null)  throw new DataStoreException("Error Save Already Exists");
-        try {
-            open();
-            ras.writeUTF(Serializator.serialize(object));
-        } catch (IOException ex) {
-            throw new DataStoreException(ex.getMessage());
-        } finally {
-            close();
-        }
+        write(object);
     }
 
     @Override
     public void update(T object) throws DataStoreException {
         if (load(object.getKey())==null) throw new DataStoreException("Error Update Not Exists");
-        try {
+        write(object);
+    }
+
+    private void write(T object) throws DataStoreException {
+      try {
             open();
             ras.seek(position);
             ras.writeUTF(Serializator.serialize(object));
@@ -55,9 +52,9 @@ public abstract class RandomAccessFileDataStore <K,T extends Serializable & Gard
             throw new DataStoreException(ex.getMessage());
         } finally {
             close();
-        }
+        }  
     }
-
+    
     @Override
     public abstract T loadBy(By c, Object info);
     

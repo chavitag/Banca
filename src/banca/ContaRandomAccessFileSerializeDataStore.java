@@ -11,15 +11,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import serializator.Serializator;
 import storage.By;
-import storage.RandomAccessFileDataStore;
+import storage.RandomAccessFileSerializeDataStore;
 
 /**
  *
  * @author xavi
  */
-public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <String,ContaBancaria>{
+public class ContaRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,ContaBancaria>{
 
-    public ContaRandomAccessFileDataStore(String filename) {
+    public ContaRandomAccessFileSerializeDataStore(String filename) {
         super(filename);
     }
     
