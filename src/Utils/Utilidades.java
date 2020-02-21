@@ -179,7 +179,20 @@ public class Utilidades {
      */
     public static void showArray(Collection al) {
         for(Object obj: al) {
-            System.out.println(obj);
+            System.out.println("\t"+obj);
         }
-    }    
+    }  
+    
+    /**
+     * Borra a pantalla
+     */
+    public final static void clearConsole() {
+        System.out.println("\n\n\n");
+        try {
+            final String os = System.getProperty("os.name");
+
+            if (os.contains("Windows")) Runtime.getRuntime().exec("cls");
+            else                        Runtime.getRuntime().exec("clear");
+        } catch (final Exception e)   {}
+    }
 }

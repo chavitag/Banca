@@ -1,4 +1,4 @@
-package storage;
+package storage.randomaccessfile;
 
 import java.io.EOFException;
 import java.io.FileNotFoundException;
@@ -6,6 +6,10 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.Collection;
+import storage.By;
+import storage.DataStore;
+import storage.DataStoreException;
+import storage.Gardable;
 
 public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implements DataStore <K, T>  {    
     protected final String filename;
@@ -52,7 +56,7 @@ public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implem
         ArrayList <T> list=new ArrayList <>();
         String data;
         T object;
-        System.out.println("Reading....");
+
         try {
             open();
             do {
@@ -122,7 +126,6 @@ public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implem
             open();
             do {
                data=readObject();
-               System.out.println("Filtrando "+data);
                if (filter(c,info,data)) result.add(data);
             } while(true);
         } catch (EOFException e) {

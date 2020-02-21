@@ -12,7 +12,8 @@ import java.util.Arrays;
  * @since 1.0
 */
 public abstract class Menu {
-
+    private String title="M E N U";
+    
     /**
      * Opcións do menú
      */
@@ -29,6 +30,11 @@ public abstract class Menu {
      */
     public Menu(String[] ops) {
         setMenu(ops);
+    }
+    
+    public Menu(String title,String[] ops) {
+        setMenu(ops);
+        this.title=title;
     }
 
     /**
@@ -74,13 +80,24 @@ public abstract class Menu {
      */
     private int showMenu() {
         int n=1;
-        System.out.println("\nM E N U");
-        System.out.println("-------");
+        
+        Utilidades.clearConsole();
+        System.out.println(title);
+        line(title);
         for(String s: opciones) {
             System.out.println(n+".- "+s);
             n++;
         }
         System.out.println();
         return n-1;
+    }
+    
+    private void line(String txt) {
+        int len=txt.length();
+        while(len>0) {
+            System.out.print("-");
+            len--;
+        }
+        System.out.println();
     }
 }

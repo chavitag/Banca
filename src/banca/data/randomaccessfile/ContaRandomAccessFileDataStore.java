@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package banca.data.randomaccessfile;
 
 import banca.AplicacionBanca;
@@ -14,15 +9,13 @@ import banca.ContaBancariaCorrenteEmpresa;
 import banca.ContaBancariaCorrentePersoal;
 import banca.Domiciliacion;
 import banca.Entidad;
-import banca.data.randomaccessfile.ClienteRandomAccessFileDataStore;
-import banca.data.BancaBy;
 import banca.data.BancaBy;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.Collection;
 import storage.By;
-import storage.RandomAccessFileDataStore;
+import storage.randomaccessfile.RandomAccessFileDataStore;
 
 /**
  *
@@ -110,11 +103,13 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
                 descuberto=ras.readDouble();
                 tipo=ras.readDouble();
                 em=new ContaBancariaCorrenteEmpresa(cl,ccc,descuberto,tipo,comision);
+                em.setSaldo(saldo);
                 readAutorizados(em);
                 return em;
             case PERSOAL:
                 comision=ras.readDouble();
                 per=new ContaBancariaCorrentePersoal(cl,ccc,comision);
+                per.setSaldo(saldo);
                 readAutorizados(per);
                 return per;
         }

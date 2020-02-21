@@ -9,10 +9,14 @@ import java.util.Collection;
 public class MenuBanca extends Menu {
     
     public MenuBanca() {
-        super(new String[]{ "Abrir unha nova conta","Ver listado de clientes","Ver listado das contas dispoñibles",
-                            "Listado de contas dun cliente","Ver Datos de Conta",
-                            "Realizar ingreso","Retirar efectivo",
-                            "Consultar saldo","Saír"});
+        super("M E N U    P R I N C I P A L",
+              new String[]{ "Abrir unha nova conta",
+                            "Ver listado de clientes",
+                            "Ver listado das contas dispoñibles",
+                            "Listado de contas dun cliente",
+                            "Xestionar Conta",
+                            "Saír"}
+        );
     }
 
     @Override
@@ -55,12 +59,14 @@ public class MenuBanca extends Menu {
             case 2:
                 System.out.println("Lista de Clientes:");
                 Utilidades.showArray(AplicacionBanca.clients.loadAll());
+                Utilidades.getString("Pulsa Enter para continuar...");
                 break;
                 
             case 3:
                 lista=AplicacionBanca.contas.loadAll();
                 System.out.println("Lista de Contas:");
                 Utilidades.showArray(lista);
+                Utilidades.getString("Pulsa Enter para continuar...");
                 break;
                 
             case 4:
@@ -68,6 +74,7 @@ public class MenuBanca extends Menu {
                 lista=AplicacionBanca.contas.loadAllBy(BancaBy.DNI, dni);
                 System.out.println("Listado de contas do Cliente "+dni);
                 Utilidades.showArray(lista);
+                Utilidades.getString("Pulsa Enter para continuar...");
                 break;
             
             case 5:
@@ -75,51 +82,28 @@ public class MenuBanca extends Menu {
                 conta=AplicacionBanca.contas.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta.details());
-                    if (conta instanceof ContaBancariaCorrente) {
-                        choose=Utilidades.choose("Xestionar (D)omiciliacións ","Dd");
-                        if (Character.toLowerCase(choose)=='d') 
-                            new MenuContaCorrente((ContaBancariaCorrente)conta).run();
+                    choose=Utilidades.choose("(X)estionar Conta ","Xx");
+                    if (Character.toLowerCase(choose)=='x') {
+                        if (conta instanceof ContaBancariaCorrente)
+                            new MenuConta((ContaBancariaCorrente)conta).run();
+                        else
+                            new MenuConta((ContaBancariaAforro)conta).run();
                     }
                 }
                 else System.out.println("A conta "+ccc+" non existe");
                 break;
                 
-            case 6:
-                ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=AplicacionBanca.contas.load(ccc);
-                if (conta!=null) {
-                    System.out.println(conta);
-                    cantidade=Utilidades.getDouble("Cantidade a Ingresar: ");
-                    cantidade=conta.ingreso(cantidade);
-                    AplicacionBanca.contas.update(conta);
-                    System.out.println("O novo saldo é de "+cantidade);
-                }
-                else System.out.println("A conta "+ccc+" non existe");
-                break; 
-                
-            case 7:
-                ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=AplicacionBanca.contas.load(ccc);
-                if (conta!=null) {
-                    System.out.println(conta);
-                    cantidade=Utilidades.getDouble("Cantidade a Retirar: ");
-                    cantidade=conta.reintegro(cantidade);
-                    AplicacionBanca.contas.update(conta);
-                    System.out.println("O novo saldo é de "+cantidade);
-                }
-                else System.out.println("A conta "+ccc+" non existe");
-                break;   
-
-            case 8:
+            /*case 6:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
                 conta=AplicacionBanca.contas.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta.details());
                 }
                 else System.out.println("A conta "+ccc+" non existe");
-                break;   
+                Utilidades.getString("Pulsa Enter para continuar...");
+                break;   */
 
-            case 9:
+            case 6:
                 return true;
         }
         return false;

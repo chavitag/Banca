@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package banca;
 
 import java.util.Collection;
@@ -55,7 +50,7 @@ public class Entidad {
     }
     
     public String details() {
-        String result=this+"\nLista de Recibos:\n\t";
+        String result=this+"\nLista de Recibos:\n";
         Collection <Domiciliacion> list=domiciliaciones.values();
         for(Domiciliacion d: list) {
             result+="\t"+d+"\n";

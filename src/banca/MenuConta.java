@@ -8,12 +8,32 @@ import java.util.Collection;
  *
  * @author xavi
  */
-public class MenuContaCorrente extends Menu {
-    ContaBancariaCorrente cc;
+public class MenuConta extends Menu {
+    ContaBancaria cc;
+    ContaBancariaCorrente cbc;
     
-    public MenuContaCorrente(ContaBancariaCorrente cc) {
-        super(new String[]{ "Ver Domiciliaciones","Eliminar Domiciliación","Eliminar Recibo","Engadir Recibo","Saír"});
+    public MenuConta(ContaBancariaCorrente cc) {
+        super("Xestión de "+cc.getCcc(),
+              new String[]{ "Información",
+                            "Realizar Ingreso",
+                            "Realizar Reintegro",
+                            "Ver Domiciliaciones",
+                            "Eliminar Domiciliación",
+                            "Eliminar Recibo",
+                            "Engadir Recibo",
+                            "Saír"});
         this.cc=cc;
+        this.cbc=cc;
+    }
+    
+    public MenuConta(ContaBancariaAforro cc) {
+        super("Xestión de "+cc,
+              new String[]{ "Información",
+                            "Realizar Ingreso",
+                            "Realizar Reintegro",
+                            "Saír"});
+        this.cc=cc;
+        this.cbc=null;
     }
 
     @Override
@@ -25,35 +45,60 @@ public class MenuContaCorrente extends Menu {
         String codigo;
         String nomentidad;
         String concepto;
-        double max_autorizado;
+        double num;
 
         switch(opc) {
             case 1:
+                System.out.println(cc.details());
+                Utilidades.getString("Pulsa Enter para continuar...");
+                break;
+            case 2:
+                num=Utilidades.getDouble("Cantidade a Ingresar: ");
+                num=cc.ingreso(num);
+                AplicacionBanca.contas.update(cc);
+                System.out.println("O novo saldo é de "+num);
+                Utilidades.getString("Pulsa Enter para continuar...");
+                break;
+            case 3:
+                num=Utilidades.getDouble("Cantidade a Retirar: ");
+                num=cc.reintegro(num);
+                AplicacionBanca.contas.update(cc);
+                System.out.println("O novo saldo é de "+num);
+                Utilidades.getString("Pulsa Enter para continuar...");
+                break;
+            case 4:
+                if (cbc==null) return true;
+                
                 System.out.println("DOMICILIACIÓNS\n----------------");
-                autorizados=cc.getAutorizados().values();
+                autorizados=cbc.getAutorizados().values();
                 if (autorizados.isEmpty()) System.out.println("Sen Domiciliacións");
                 else                       {
                     for(Entidad e: autorizados) {
                         System.out.println(e.details());
                     }
                 }
+                Utilidades.getString("Pulsa Enter para continuar...");
                 break;
-            case 2:
+            case 5:
+                if (cbc==null) return false;
+                
                 codigo=Utilidades.getString("Código de Entidade: ");
-                entidad=cc.getAutorizados().get(codigo);
+                entidad=cbc.getAutorizados().get(codigo);
                 if (entidad==null) System.out.println("Entidade non rexistrada");
                 else {
                     System.out.println(entidad.details());
                     choose=Utilidades.choose("Se eliminarán todos os recibos. (C)ontinuar? ", "Cc");
                     if (Character.toLowerCase(choose)=='c') {
-                        cc.getAutorizados().remove(codigo);
+                        cbc.getAutorizados().remove(codigo);
                         AplicacionBanca.contas.update(cc);
                     }
                 }
                 break;
-            case 3:
+            case 6:
+                if (cbc==null) return false;
+                
                 codigo=Utilidades.getString("Código de Entidade: ");
-                entidad=cc.getAutorizados().get(codigo);
+                entidad=cbc.getAutorizados().get(codigo);
                 if (entidad==null) System.out.println("Entidade non rexistrada");
                 else {
                     codigo=Utilidades.getString("Código de Domiciliación: ");
@@ -65,14 +110,16 @@ public class MenuContaCorrente extends Menu {
                     }
                 }
                 break;
-            case 4:
+            case 7:
+                if (cbc==null) return false;
+                
                 codigo=Utilidades.getString("Código de Entidade: ");
-                entidad=cc.getAutorizados().get(codigo);
+                entidad=cbc.getAutorizados().get(codigo);
                 if (entidad==null) {
                     nomentidad=Utilidades.getString("Nome Entidade: ");
-                    max_autorizado=Utilidades.getDouble("Máximo Autorizado: ");
-                    entidad=new Entidad(codigo,nomentidad,max_autorizado);
-                    cc.getAutorizados().put(codigo,entidad);
+                    num=Utilidades.getDouble("Máximo Autorizado: ");
+                    entidad=new Entidad(codigo,nomentidad,num);
+                    cbc.getAutorizados().put(codigo,entidad);
                 } else {
                     System.out.println("Engadindo Domiciliación de  "+entidad.details());
                 }
@@ -86,10 +133,11 @@ public class MenuContaCorrente extends Menu {
                     AplicacionBanca.contas.update(cc);
                 }
                 break;
-            case 5:
+            case 8:
+                if (cbc==null) return false;
+                
                 return true;
         }
         return false;
     }
-    
 }

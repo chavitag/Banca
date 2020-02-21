@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package storage;
 
 /**
@@ -10,9 +5,9 @@ package storage;
  * @author xavi
  */
 public class DataStoreException extends Exception {
-    DataStoreException() {}
+    public DataStoreException() {}
     
-    DataStoreException(String msg) {
+    public DataStoreException(String msg) {
         super(msg);
     }
 }
