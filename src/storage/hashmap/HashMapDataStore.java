@@ -9,7 +9,6 @@ import storage.Gardable;
 
 /**
  *
- * @author xavi
  * @param <K>
  * @param <T>
  */
@@ -45,6 +44,8 @@ public abstract class HashMapDataStore <K,T extends Gardable<K>> implements Data
     }
     
     @Override
-    public void closeDataStore() {
-    }
+    public void openDataStore() throws DataStoreException {    }
+    
+    @Override
+    public void closeDataStore() throws DataStoreException {    }
 }

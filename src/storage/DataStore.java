@@ -57,9 +57,14 @@ public interface DataStore <K,T extends Gardable> {
          * @return Collection con todos os obxectos do DataStore.
          */
         public Collection <T> loadAll();
+      
+        /**
+         * "Abre" o DataStore. 
+         */
+        public void openDataStore() throws DataStoreException;
         
         /**
          * "Pecha" o DataStore. 
          */
-        public void closeDataStore();
+        public void closeDataStore() throws DataStoreException;
 }
