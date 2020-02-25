@@ -12,7 +12,7 @@ import banca.data.hashmap.EntidadHashMapDataStore;
  * Aplicación Banca con almacenamento en HashMap.
  * FUNCIONAMENTO:
  *  Almacenamos a información en dous DataStore implementados mediante HashMap, un para Clientes
- *  e outro para Contas Bancarias.
+ *  outro para Contas Bancarias e outro para as Entidades.
  * 
  *  Para non duplicar a información dos clientes (que está en cada ContaBancaria), se almacenará so
  *  o DNI coa conta bancaria, almacenando os datos do Cliente so no ficheiro de Clientes. 
@@ -20,6 +20,12 @@ import banca.data.hashmap.EntidadHashMapDataStore;
  *  so no ficheiro de Clientes, deixa os datos vellos coa información da Conta Bancaria.
  * 
  *  Coas Autorizacións e as entidades se traballará de xeito similar.
+ * 
+ *  Como a información se almacena únicamente en HashMaps é volátil e se perde de unha execución
+ *  da aplicación a outra. 
+ * 
+ *  Si nos fixamos na forma de traballar do HashMapDataStore, debemos ter en conta que se devolven os
+ *  obxectos almacenados no HashMap, NON UNHA COPIA.
  * 
  */
 public class AplicacionBanca {
