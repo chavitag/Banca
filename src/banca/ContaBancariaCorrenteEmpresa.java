@@ -97,4 +97,14 @@ public class ContaBancariaCorrenteEmpresa extends ContaBancariaCorrente {
                 "\tComisión Descuberto: "+comision+"€"+
                 "\tTipo de Interés Descuberto: "+getTipod()+"%";
     }
+
+    @Override
+    public byte[] serialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ContaBancariaCorrenteEmpresa unserialize(byte[] bytes) throws ClassNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

@@ -31,4 +31,14 @@ public class ContaBancariaAforro extends ContaBancaria {
                 "\nDatos da Conta:\n\t"+super.toString()+": \n"+
                 "\tTipo de Interés: "+getTipo()+"%";
     }
+
+    @Override
+    public byte[] serialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ContaBancariaAforro unserialize(byte[] bytes) throws ClassNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

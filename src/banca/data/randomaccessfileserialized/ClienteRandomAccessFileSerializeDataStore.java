@@ -19,4 +19,8 @@ public class ClienteRandomAccessFileSerializeDataStore extends RandomAccessFileS
     protected boolean filter(By c, Object info, Cliente data) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void closeDataStore() {
+    }
 }

@@ -15,4 +15,5 @@ public interface DataStore <K,T extends Gardable> {
         public T load(K info);
         public Collection <T> loadAllBy(By c,Object info);
         public Collection <T> loadAll();
+        public void closeDataStore();
 }

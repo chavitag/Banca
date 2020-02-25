@@ -11,7 +11,7 @@ import storage.DataStore;
 import storage.DataStoreException;
 import storage.Gardable;
 
-public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implements DataStore <K, T>  {    
+public abstract class RandomAccessFileDataStore <K,T extends Gardable<K,T>> implements DataStore <K, T>  {    
     protected final String filename;
     protected RandomAccessFile ras;
     protected long position;
@@ -22,7 +22,7 @@ public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implem
     
     @Override
     public void save(T object) throws DataStoreException {
-        if (load(object.getKey()) != null)  throw new DataStoreException("Error Save Already Exists");
+        if (load(object.getKey()) != null) throw new DataStoreException("Error Save Already Exists");
         write(object);
     }
 
@@ -136,7 +136,9 @@ public abstract class RandomAccessFileDataStore <K,T extends Gardable<K>> implem
         }
         return result;
     }
-    
+       
+    @Override
+    public void closeDataStore() {}
     
     protected abstract boolean filter(By c,Object info,T data);
     protected abstract void writeObject(T object) throws IOException;

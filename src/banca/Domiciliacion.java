@@ -5,8 +5,8 @@ package banca;
  * @author xavi
  */
 public class Domiciliacion {
-    private final String codigo;
-    private final String concepto;
+    private final String codigo;    // 8 chars
+    private final String concepto;  // 30 chars
 
     Domiciliacion(String codigo, String concepto) {
         this.codigo=codigo;

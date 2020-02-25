@@ -8,8 +8,8 @@ import java.util.HashMap;
  * @author xavi
  */
 public class Entidad {
-    private final String codigo;
-    private final String nome;
+    private final String codigo; // 8 chars
+    private final String nome;   // 20 chars
     private double max_autorizado;
     private final HashMap <String,Domiciliacion> domiciliaciones=new HashMap<>();    
     

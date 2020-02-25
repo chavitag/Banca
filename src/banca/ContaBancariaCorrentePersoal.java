@@ -43,4 +43,14 @@ public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
                 "\tComisión Anual: "+comision+"€";
     }
 
+    @Override
+    public byte[] serialize() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ContaBancariaCorrentePersoal unserialize(byte[] bytes) throws ClassNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

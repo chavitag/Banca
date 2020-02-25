@@ -1,10 +1,11 @@
 package storage.randomaccessfile;
 
-import storage.randomaccessfile.RandomAccessFileDataStore;
 import java.io.IOException;
 import java.io.Serializable;
-import serializator.Serializator;
-import storage.DataStore;
+// Cambiando o Serializator, cambia o xeito de almacenar....
+import Utils.serializators.objectstream.Serializator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import storage.Gardable;
 
 /**
@@ -13,26 +14,26 @@ import storage.Gardable;
  * @param <K>
  * @param <T>
  */
-public abstract class RandomAccessFileSerializeDataStore <K,T extends Serializable & Gardable<K>> 
-            extends RandomAccessFileDataStore <K,T> 
-            implements DataStore <K, T>  {
-    
+public abstract class RandomAccessFileSerializeDataStore <K,T extends Serializable & Gardable<K,T>> 
+            extends RandomAccessFileDataStore <K,T> {
+        
     public RandomAccessFileSerializeDataStore(String filename) {
         super(filename);
     }
         
     @Override
     protected void writeObject(T object) throws IOException {
-        ras.writeUTF(Serializator.serialize(object));
+        Serializator <T> serialize=new Serializator<>(object);
+        ras.writeUTF(serialize.getString());
     }
     
     @Override
     protected T readObject() throws IOException {
-        String data=ras.readUTF(); // Si e fin de ficheiro ou non lee un String lanza unha Exception
+        Serializator <T> serialize = new Serializator<>(ras.readUTF());
         try {
-            return Serializator.unserialize(data);
+            return serialize.getObject();
         } catch (ClassNotFoundException ex) {
-            throw new IOException("Unknown class reading data");
+            throw new IOException("Error Class reading Object");
         }
     }
 }

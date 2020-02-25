@@ -23,7 +23,8 @@ import storage.randomaccessfile.RandomAccessFileDataStore;
  */
 public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <String,ContaBancaria>{
     private final String AUTORIZADOSNAME="Autorizados.dat";
-    private enum TipoConta {AFORRO,EMPRESA,PERSOAL};
+
+     private enum TipoConta {AFORRO,EMPRESA,PERSOAL};
     RandomAccessFile autorizados=null;
     
     public ContaRandomAccessFileDataStore()  {
@@ -46,10 +47,14 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
         ContaBancariaAforro af;
         ContaBancariaCorrenteEmpresa em;
         ContaBancariaCorrentePersoal per;
+        ClienteRandomAccessFileDataStore cl_ras=new ClienteRandomAccessFileDataStore();
+        
+        String dni=object.getCliente().getDni();
+        if (cl_ras.load(dni)==null) throw new IOException("ERROR: Client not found");
         
         TipoConta tc=getType(object);
         ras.writeUTF(tc.name());
-        ras.writeUTF(object.getCliente().getDni());
+        ras.writeUTF(dni);
         ras.writeUTF(object.getCcc());
         ras.writeDouble(object.getSaldo());
         switch(tc) {
@@ -180,5 +185,9 @@ public class ContaRandomAccessFileDataStore extends RandomAccessFileDataStore <S
             sz--;
         }
         return e;
+    }
+    
+    @Override
+    public void closeDataStore() {
     }
 }

@@ -1,19 +1,23 @@
 package banca;
 
 import Utils.Utilidades;
+import Utils.TypesSerializator;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Calendar;
+import java.util.Collection;
 import storage.Gardable;
 
 /**
  *
  * @author xavi
  */
-public class Cliente implements Serializable,Gardable <String> {
-    private String dni;
-    private String nome;
-    private String apelidos;
-    private Calendar data_nacemento;
+public class Cliente implements Serializable,Gardable <String,Cliente> {
+    private String dni;     // 9 Chars
+    private String nome;    // 20 Chars max
+    private String apelidos;    // 50 Chars max
+    private Calendar data_nacemento; 
 
     public Cliente(String dni, String nome, String apelidos, Calendar data) {
         this.dni=dni;
@@ -122,5 +126,24 @@ public class Cliente implements Serializable,Gardable <String> {
     @Override
     public String getKey() {
         return dni;
+    }
+
+    @Override
+    public byte[] serialize() {
+        ObjectType tc;
+        Collection <Byte> data=new ArrayList <>();
+        
+        tc=ObjectType.CLIENTE;
+        TypesSerializator.addAll(data,TypesSerializator.serialize(tc.ordinal()));
+        TypesSerializator.addAll(data,TypesSerializator.serialize(getDni(),9));
+        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getNome(),20));
+        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getApelidos(),50));
+        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getData_nacemento()));
+        return TypesSerializator.getByteArray(data); 
+    }
+
+    @Override
+    public Cliente unserialize(byte[] bytes) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

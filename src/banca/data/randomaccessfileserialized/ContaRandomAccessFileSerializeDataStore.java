@@ -10,7 +10,7 @@ import storage.randomaccessfile.RandomAccessFileSerializeDataStore;
  *
  * @author xavi
  */
-public class ContaRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,ContaBancaria>{
+public class ContaRandomAccessFileSerializeDataStore extends RandomAccessFileSerializeDataStore <String,ContaBancaria> {
 
     public ContaRandomAccessFileSerializeDataStore() {
         super(AplicacionBanca.CONTAS_FILENAME);
@@ -25,5 +25,9 @@ public class ContaRandomAccessFileSerializeDataStore extends RandomAccessFileSer
                 break;
         }
         return false;
+    }
+
+    @Override
+    public void closeDataStore() {
     }
 }

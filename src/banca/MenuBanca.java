@@ -38,32 +38,32 @@ public class MenuBanca extends Menu {
                 System.out.println("Cliente:");
                 dni=Utilidades.getString("DNI: ");
                 if (!Cliente.verificaDNI(dni)) throw new Exception("DNI erróneo");
-                cliente=AplicacionBanca.clients.load(dni);
+                cliente=AplicacionBanca.CLIENTS.load(dni);
                 if (cliente!=null) System.out.println("O cliente xa existe: "+cliente);
                 else {
                     nome=Utilidades.getString("Nome: ");
                     apelidos=Utilidades.getString("Apelidos: ");
                     data=Utilidades.getData("Data nacemento: ");
                     cliente=new Cliente(dni,nome,apelidos,data);
-                    AplicacionBanca.clients.save(cliente);
+                    AplicacionBanca.CLIENTS.save(cliente);
                 }
                 System.out.println("Datos da Conta:");
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
                 if (!ContaBancaria.verificaCCC(ccc)) throw new Exception("Número de Conta erróneo");
-                if (AplicacionBanca.contas.load(ccc)!=null) throw new Exception("A conta xa existe");
+                if (AplicacionBanca.CONTAS.load(ccc)!=null) throw new Exception("A conta xa existe");
                 choose=Utilidades.choose("Conta de A(f)orro, Conta Corrente (E)mpresa ou Conta Corrente (P)ersoal? ","FEPfep");
                 conta=contaBancariaFactory(cliente,ccc,choose);
-                AplicacionBanca.contas.save(conta);
+                AplicacionBanca.CONTAS.save(conta);
                 break;
                 
             case 2:
                 System.out.println("Lista de Clientes:");
-                Utilidades.showArray(AplicacionBanca.clients.loadAll());
+                Utilidades.showArray(AplicacionBanca.CLIENTS.loadAll());
                 Utilidades.getString("Pulsa Enter para continuar...");
                 break;
                 
             case 3:
-                lista=AplicacionBanca.contas.loadAll();
+                lista=AplicacionBanca.CONTAS.loadAll();
                 System.out.println("Lista de Contas:");
                 Utilidades.showArray(lista);
                 Utilidades.getString("Pulsa Enter para continuar...");
@@ -71,7 +71,7 @@ public class MenuBanca extends Menu {
                 
             case 4:
                 dni=Utilidades.getString("DNI: ");
-                lista=AplicacionBanca.contas.loadAllBy(BancaBy.DNI, dni);
+                lista=AplicacionBanca.CONTAS.loadAllBy(BancaBy.DNI, dni);
                 System.out.println("Listado de contas do Cliente "+dni);
                 Utilidades.showArray(lista);
                 Utilidades.getString("Pulsa Enter para continuar...");
@@ -79,7 +79,7 @@ public class MenuBanca extends Menu {
             
             case 5:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=AplicacionBanca.contas.load(ccc);
+                conta=AplicacionBanca.CONTAS.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta.details());
                     choose=Utilidades.choose("(X)estionar Conta ","Xx");
@@ -95,7 +95,7 @@ public class MenuBanca extends Menu {
                 
             /*case 6:
                 ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=AplicacionBanca.contas.load(ccc);
+                conta=AplicacionBanca.CONTAS.load(ccc);
                 if (conta!=null) {
                     System.out.println(conta.details());
                 }

@@ -55,14 +55,14 @@ public class MenuConta extends Menu {
             case 2:
                 num=Utilidades.getDouble("Cantidade a Ingresar: ");
                 num=cc.ingreso(num);
-                AplicacionBanca.contas.update(cc);
+                AplicacionBanca.CONTAS.update(cc);
                 System.out.println("O novo saldo é de "+num);
                 Utilidades.getString("Pulsa Enter para continuar...");
                 break;
             case 3:
                 num=Utilidades.getDouble("Cantidade a Retirar: ");
                 num=cc.reintegro(num);
-                AplicacionBanca.contas.update(cc);
+                AplicacionBanca.CONTAS.update(cc);
                 System.out.println("O novo saldo é de "+num);
                 Utilidades.getString("Pulsa Enter para continuar...");
                 break;
@@ -90,7 +90,7 @@ public class MenuConta extends Menu {
                     choose=Utilidades.choose("Se eliminarán todos os recibos. (C)ontinuar? ", "Cc");
                     if (Character.toLowerCase(choose)=='c') {
                         cbc.getAutorizados().remove(codigo);
-                        AplicacionBanca.contas.update(cc);
+                        AplicacionBanca.CONTAS.update(cc);
                     }
                 }
                 break;
@@ -106,7 +106,7 @@ public class MenuConta extends Menu {
                     if (dom==null) System.out.println("A domiciliacion non existe");
                     else {
                         entidad.getDomiciliaciones().remove(codigo);
-                        AplicacionBanca.contas.update(cc);
+                        AplicacionBanca.CONTAS.update(cc);
                     }
                 }
                 break;
@@ -130,7 +130,7 @@ public class MenuConta extends Menu {
                 } else {
                     dom=new Domiciliacion(codigo,concepto);
                     entidad.getDomiciliaciones().put(codigo,dom);
-                    AplicacionBanca.contas.update(cc);
+                    AplicacionBanca.CONTAS.update(cc);
                 }
                 break;
             case 8:

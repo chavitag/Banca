@@ -7,7 +7,8 @@ import java.util.HashMap;
  * @author xavi
  */
 public abstract class ContaBancariaCorrente extends ContaBancaria {
-    private final HashMap <String,Entidad> listaAutorizados=new HashMap<>();
+    // Impide a inclusión do hashmap en WriteObject...
+    private transient final HashMap <String,Entidad> listaAutorizados=new HashMap<>();
     
     public ContaBancariaCorrente(Cliente cliente,String ccc) {
         super(cliente,ccc);
