@@ -1,8 +1,8 @@
 package storage.randomaccessfile;
 
 import java.io.IOException;
-// Cambiando o Serializator, cambia o xeito de almacenar....
-import Utils.serializators.objectstream.Serializator;
+// Cambiando o StreamSerializator, cambia o xeito de almacenar....
+import Utils.serializators.objectstream.StreamSerializator;
 import storage.Gardable;
 
 /**
@@ -20,13 +20,13 @@ public abstract class RandomAccessFileSerializeDataStore <K,T extends Gardable<K
         
     @Override
     protected void writeObject(T object) throws IOException {
-        Serializator <T> serialize=new Serializator<>(object);
+        StreamSerializator <T> serialize=new StreamSerializator<>(object);
         ras.writeUTF(serialize.getString());
     }
     
     @Override
     protected T readObject() throws IOException {
-        Serializator <T> serialize = new Serializator<>(ras.readUTF());
+        StreamSerializator <T> serialize = new StreamSerializator<>(ras.readUTF());
         try {
             return serialize.getObject();
         } catch (ClassNotFoundException ex) {

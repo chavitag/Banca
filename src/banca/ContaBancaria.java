@@ -1,16 +1,15 @@
 package banca;
 
-import java.io.Serializable;
 import storage.Gardable;
 
 public abstract class ContaBancaria implements Gardable <String,ContaBancaria> {
-    private final Cliente cliente;
+    private final String cliente;
     private final String ccc; // 20 chars
     private double saldo;
     
     ContaBancaria(Cliente cliente,String ccc)  {
         if (!verificaCCC(ccc)) throw new IllegalArgumentException("Error Núemero de Conta");
-        this.cliente=cliente;
+        this.cliente=cliente.getDni();
         this.ccc=ccc;
         this.saldo=0;
     }
@@ -19,7 +18,9 @@ public abstract class ContaBancaria implements Gardable <String,ContaBancaria> {
      * @return the cliente
      */
     public Cliente getCliente() {
-        return cliente;
+        Cliente cli=AplicacionBanca.CLIENTS.load(this.cliente);
+        if (cli==null) throw new IllegalArgumentException("Client not found for "+ccc+".");
+        return cli;
     }
 
     /**

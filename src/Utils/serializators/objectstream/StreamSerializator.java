@@ -8,21 +8,25 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- *
+ * Serializa un obxecto utilizando Streams, que veremos na seguinte unidade
+ * (ByteArrayInputStream, ByteArrayOutputStream, ObjectInputStream, ObjectOutputStream)
+ * 
+ * Esta clase será capaz de serializar calqueira obxecto que implemente a interfaz Serializable
+ * 
  * @author xavi
  * @param <T>
  */
-public class Serializator <T extends Serializable> extends Utils.Serializator <T> {
+public class StreamSerializator <T extends Serializable> extends Utils.Serializator <T> {
 
-    public Serializator(T object) {
+    public StreamSerializator(T object) {
         super(object);
     }
     
-    public Serializator(byte[] bobject) {
+    public StreamSerializator(byte[] bobject) {
         super(bobject);
     }
     
-    public Serializator(String strobject) {
+    public StreamSerializator(String strobject) {
         super(strobject);
     }
     

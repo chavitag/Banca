@@ -8,8 +8,11 @@ import storage.DataStore;
  * Aplicación Banca con almacenamento en RandomAccessFile sinxelo.
  *  Recuperamos a información cando creamos os obxectos DataStore e a gardamos cando os "Pechamos"
  *  eliminando os datos anteriores.
+ * 
  *  Para non duplicar a información dos clientes (que está en cada ContaBancaria), se almacenará so
- *  no ficheiro de Clientes, almacenando coa conta bancaria so o DNI do cliente.
+ *  no ficheiro de Clientes almacenando coa conta bancaria so o DNI do cliente. Deste xeito evitamos
+ *  posibles incongruencias como a modificación dos datos dun Cliente so no ficheiro de Clientes, 
+ *  quedando os datos vellos coa información da Conta Bancaria.
  * 
  *  Para poder gardar a información no RandomAccessFile, podemos tomar dúas aproximacións:
  *  a)  "Serializar" os obxectos que queremos gardar. A "Serialización" consiste en transformar os obxectos en bytes

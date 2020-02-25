@@ -100,19 +100,19 @@ public class Serializator <T> extends Utils.Serializator <T> {
         int idx=1;
         
         System.arraycopy(bobject,idx,buffer,0,bobject.length-idx);
-        dni=Utils.TypesSerializator.unserialize(String.class,buffer);
+        dni=Utils.TypesSerializator.unserialize(buffer);
         idx+=Utils.TypesSerializator.next(buffer);
         
         System.arraycopy(bobject,idx,buffer,0,bobject.length-idx);
-        nome=Utils.TypesSerializator.unserialize(String.class,buffer);
+        nome=Utils.TypesSerializator.unserialize(buffer);
         idx+=Utils.TypesSerializator.next(buffer);
         
         System.arraycopy(bobject,idx,buffer,0,bobject.length-idx);
-        apelidos=Utils.TypesSerializator.unserialize(String.class,buffer);
+        apelidos=Utils.TypesSerializator.unserialize(buffer);
         idx+=Utils.TypesSerializator.next(buffer);
         
         System.arraycopy(bobject,idx,buffer,0,bobject.length-idx);
-        dnacemento=Utils.TypesSerializator.unserialize(Calendar.class,buffer);
+        dnacemento=Utils.TypesSerializator.unserialize(buffer);
         return new Cliente(dni,nome,apelidos,dnacemento);
     }
     
