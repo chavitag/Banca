@@ -62,6 +62,9 @@ import storage.DataStore;
  * @author xavi
  */
 public class AplicacionBanca {
+    // Nomes para os ficheiros
+    public final static String CONTAS_FILENAME="Contas.dat";
+    public final static String CLIENTES_FILENAME="Clientes.dat";
     
     // DataStores para Clientes e Contas Bancarias. 
     public static DataStore <String,ContaBancaria> CONTAS=new ContaHashMapDataStore ();

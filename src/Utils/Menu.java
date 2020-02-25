@@ -5,45 +5,45 @@ import java.util.Arrays;
 
 /**
  * Menu
- * E unha clase abstracta da que se hereda o menú concreto
- * @author Javier Taboada
+ * Crea un menú. E unha clase abstracta. As clases que hereden de esta
+ * deberán implementar o método menu, que se encargará de levara a cabo
+ * as distintas opcións. 
+ * 
+ * Esta clase implementa as tarefas comúns e repetitivas cando deseñamos un menú
+ * 
  * @author xavitag.es
  * @version 1.0
  * @since 1.0
 */
 public abstract class Menu {
+    /**
+     * Título por defecto
+     */
     private String title="M E N U";
     
     /**
-     * Opcións do menú
+     * Lista de Opcións do menú
      */
     public ArrayList<String> opciones=new ArrayList <>();
     
     /**
-     * Constructor: Menú sin opcións
-     */
-    public Menu() {  }
-    
-    /**
-     * Constructor: Menú con opcións
+     * Constructor con título por defecto
      * @param ops - Opcións do menú
      */
     public Menu(String[] ops) {
         setMenu(ops);
     }
     
+    /**
+     * Constructor con título
+     * @param title - Título do menú
+     * @param ops - Opcións do menú
+     */
     public Menu(String title,String[] ops) {
         setMenu(ops);
         this.title=title;
     }
 
-    /**
-     * Pon opcións a este menú
-     * @param ops - Opcións do menú
-     */
-    public void setMenu(String[] ops) {
-        opciones.addAll(Arrays.asList(ops));
-    }
     
     /**
      * Visualiza o menú e da a elexir unha das opcións do menú  
@@ -58,7 +58,7 @@ public abstract class Menu {
             try {
                 nops=showMenu();
                 opc=Utilidades.getInt("Elixe Opcion: ",1,nops);
-                end=menu(opc);
+                end=menu(opc); // Chamamos ao método menu para levar a cabo a opción. Devolverá true para finalizar
             } catch (Exception ex) {
                 System.out.println("\nERROR: \n"+ex.getMessage());
             }
@@ -92,6 +92,9 @@ public abstract class Menu {
         return n-1;
     }
     
+    /**
+     * Debuxa unha liña da lonxitude de txt
+     */
     private void line(String txt) {
         int len=txt.length();
         while(len>0) {
@@ -99,5 +102,12 @@ public abstract class Menu {
             len--;
         }
         System.out.println();
+    }
+    
+    /**
+     * Pon as opcións de este menú
+     */
+    private void setMenu(String[] ops) {
+        opciones.addAll(Arrays.asList(ops));
     }
 }

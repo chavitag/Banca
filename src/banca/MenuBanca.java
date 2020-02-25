@@ -93,16 +93,6 @@ public class MenuBanca extends Menu {
                 else System.out.println("A conta "+ccc+" non existe");
                 break;
                 
-            /*case 6:
-                ccc=Utilidades.getString("Número de Conta (CCC): ");
-                conta=AplicacionBanca.CONTAS.load(ccc);
-                if (conta!=null) {
-                    System.out.println(conta.details());
-                }
-                else System.out.println("A conta "+ccc+" non existe");
-                Utilidades.getString("Pulsa Enter para continuar...");
-                break;   */
-
             case 6:
                 return true;
         }
