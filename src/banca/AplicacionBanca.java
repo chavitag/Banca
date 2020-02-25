@@ -13,7 +13,7 @@ import storage.DataStoreException;
 
 /**
  * Aplicación Banca con almacenamento dos HashMap en RandomAccessFile ao inicio e ao final da aplicacion.
- * Aproximación sen modificar Cliente nin as ContaBancaria....
+ * Aproximación sen modificar Cliente nin Entidade nin as ContaBancaria....
  * 
  * FUNCIONAMENTO:
  * 
@@ -66,7 +66,7 @@ import storage.DataStoreException;
  *  seus atributos. Esto faría máis simple a implementación, pero exixe engadir a Gardable os métodos
  * writeObject(RandomAccessFile ras); e readObject(RandomAccessFile ras);  que leeran e escribirán un
  * obxecto respectivamente no RandomAccessFile a partir da posición actual. Probablemente sexa a 
- * mellor aproximación, pero require engadir eses métodos a Cliente, ContaBancariaCorrenteEmpresa, 
+ * mellor aproximación, pero require engadir eses métodos a Entidad, Cliente, ContaBancariaCorrenteEmpresa, 
  * ContaBancariaCorrentePersoal e ContaBancariaAforro.
  * 
  * 2.- Definir estes métodos no DataStore correspondente. A vantaxe de esta aproximación é que non precisa
