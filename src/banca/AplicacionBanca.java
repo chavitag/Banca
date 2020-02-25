@@ -1,7 +1,5 @@
 package banca;
 
-import banca.data.randomaccessfile.ClienteRandomAccessFileDataStore;
-import banca.data.randomaccessfile.ContaRandomAccessFileDataStore;
 import storage.DataStore;
 
 /**
@@ -64,11 +62,8 @@ import storage.DataStore;
  * @author xavi
  */
 public class AplicacionBanca {
-    // Nomes dos Ficheiros
-    public final static String CONTAS_FILENAME="Contas.dat";
-    public final static String CLIENTES_FILENAME="Clientes.dat";
     
-    // DataStores para Clientes e Contas Bancarias. No constructor podemos aproveitar para cargar os datos.
+    // DataStores para Clientes e Contas Bancarias. 
     public static DataStore <String,ContaBancaria> CONTAS=new ContaHashMapDataStore ();
     public static DataStore <String,Cliente> CLIENTS=new ClienteHashMapDataStore ();
     

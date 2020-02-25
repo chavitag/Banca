@@ -1,8 +1,6 @@
 package banca;
 
 import Utils.Utilidades;
-import Utils.TypesSerializator;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -129,20 +127,11 @@ public class Cliente implements Gardable <String,Cliente> {
 
     @Override
     public byte[] serialize() {
-        ObjectType tc;
-        Collection <Byte> data=new ArrayList <>();
-        
-        tc=ObjectType.CLIENTE;
-        TypesSerializator.addAll(data,TypesSerializator.serialize(tc.ordinal()));
-        TypesSerializator.addAll(data,TypesSerializator.serialize(getDni(),9));
-        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getNome(),20));
-        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getApelidos(),50));
-        TypesSerializator.addAll(data,Utils.TypesSerializator.serialize(getData_nacemento()));
-        return TypesSerializator.getByteArray(data); 
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override
     public Cliente unserialize(byte[] bytes) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
