@@ -7,8 +7,6 @@ import storage.DataStore;
 import banca.data.hashmap.ClienteHashMapDataStore;
 import banca.data.hashmap.ContaHashMapDataStore;
 import banca.data.hashmap.EntidadHashMapDataStore;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import storage.DataStoreException;
 
 /**
@@ -62,16 +60,20 @@ import storage.DataStoreException;
  * carga de datos dende un ficheiro. E a mesma misión que ten realmente closeDataStore...
  * 
  * Respecto á propia carga dos obxectos podemos tomar dúas aproximacións: 
+ * 
  *  1.- Os propios obxectos se encargarán de gardar e recuperar do RandomAccessFile os valores dos 
  *  seus atributos. Esto faría máis simple a implementación, pero exixe engadir a Gardable os métodos
  * writeObject(RandomAccessFile ras); e readObject(RandomAccessFile ras);  que leeran e escribirán un
  * obxecto respectivamente no RandomAccessFile a partir da posición actual. Probablemente sexa a 
- * mellor aproximación, pero require engadir eses métodos a Entidad, Cliente, ContaBancariaCorrenteEmpresa, 
- * ContaBancariaCorrentePersoal e ContaBancariaAforro.
+ * mellor aproximación e require engadir eses métodos a Entidad, Cliente, ContaBancariaCorrenteEmpresa, 
+ * ContaBancariaCorrentePersoal e ContaBancariaAforro pero permite escribir unha clase xenérica que se 
+ * ocupe de gardar e recuperar calqueira HashMap.
  * 
  * 2.- Definir estes métodos no DataStore correspondente. A vantaxe de esta aproximación é que non precisa
- * modificación da aplicación.
+ * modificación da aplicación, pero require crar un obxecto DataStore específico para cada clase.
  * 
+ * 
+ * ESTA IMPLEMENTACIÓN UTILIZA A APROXIMACIÓN 2
  */
 public class AplicacionBanca {
     public static final String F_CLIENTES="clientes.dat";

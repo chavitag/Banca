@@ -50,12 +50,16 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
         }
     }
 
+    /** 
+     * "Pecha" o DataStore, aproveitamos para gardar os datos do HashMap.
+     * @throws DataStoreException 
+     */
     @Override
     public void closeDataStore() throws DataStoreException {
         Collection <T> data=lista.values();
         try {
             open();
-            ras.setLength(0);
+            ras.setLength(0); // Borramos o contido.
             for(T obx: data) {
                 writeObject(obx);
             }
@@ -66,6 +70,10 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
         }
     }
    
+    /**
+     * Abre o RandomAccessFile en modo lectura/escritura.
+     * @throws DataStoreException 
+     */
     private void open() throws DataStoreException {
         try {
             if (ras==null) {
@@ -76,6 +84,10 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
         }
     }
     
+    /**
+     * Pecha o RandomAccessFile
+     * @throws DataStoreException 
+     */
     private void close() throws DataStoreException {
         try {
             if (ras!=null) ras.close();
