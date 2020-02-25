@@ -13,7 +13,7 @@ import storage.Gardable;
  * @param <K>
  * @param <T>
  */
-public abstract class HashMapDataStore <K,T extends Gardable<K,T>> implements DataStore <K, T> {
+public abstract class HashMapDataStore <K,T extends Gardable<K>> implements DataStore <K, T> {
     protected final HashMap <K,T> lista=new HashMap <>();
 
     @Override

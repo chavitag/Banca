@@ -1,6 +1,6 @@
 package banca.data.hashmap;
 
-import banca.entities.Cliente;
+import banca.entities.Entidad;
 import java.util.Collection;
 import storage.By;
 import storage.hashmap.HashMapDataStore;
@@ -9,14 +9,15 @@ import storage.hashmap.HashMapDataStore;
  *
  * @author xavi
  */
-public class ClienteHashMapDataStore extends HashMapDataStore <String,Cliente> {
+public class EntidadHashMapDataStore extends HashMapDataStore <String,Entidad> {
+    
     @Override
-    public Cliente loadBy(By c, Object info) {
+    public Entidad loadBy(By c, Object info) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Collection<Cliente> loadAllBy(By c, Object info) {
+    public Collection<Entidad> loadAllBy(By c, Object info) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

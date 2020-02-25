@@ -1,6 +1,6 @@
 package banca.data.hashmap;
 
-import banca.ContaBancaria;
+import banca.entities.ContaBancaria;
 import banca.data.BancaBy;
 import java.util.ArrayList;
 import java.util.Collection;

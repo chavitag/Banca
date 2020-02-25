@@ -1,13 +1,28 @@
-package banca;
+package banca.entities;
 
+/**
+ * Unha ContaBancariaCorrentePersoal é unha ContaBancariaCorrente.
+ * As contas persoais teñen unha comision de mantemento
+ */
 public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
-    private double comision;
+    private double comision; // Comisión de mantemento
     
+    /**
+     * Constructor con comisión 0
+     * @param cliente Cliente ao que pertence a conta
+     * @param ccc  Número de conta
+     */
     public ContaBancariaCorrentePersoal(Cliente cliente,String ccc)  {
         super(cliente,ccc);
         this.comision=0;
     }
 
+    /**
+     * Constructor indicando a comisión
+     * @param cliente Cliente ao que pertence a conta
+     * @param ccc Número de conta
+     * @param comision Comisión de mantemento
+     */
     public ContaBancariaCorrentePersoal(Cliente cliente,String ccc,double comision) {
         super(cliente,ccc);
         this.comision=comision;
@@ -27,12 +42,20 @@ public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
         this.comision = comision;
     }
     
-      @Override
+    /**
+     * Sobreposición do método toString de Object
+     * @return String representando o obxecto
+     */
+    @Override
     public String toString() {
         String str=super.toString();
         return "CONTA CORRENTE PERSOAL: "+str;
     }
     
+    /**
+     * Devolve un String cos detalles da conta
+     * @return  String cos detalles da conta
+     */
     @Override
     public String details() {
         return  "CONTA CORRENTE PERSOAL\n"+
@@ -42,15 +65,4 @@ public class ContaBancariaCorrentePersoal extends ContaBancariaCorrente {
                 "\nDatos da Conta:\n\t"+super.toString()+"\n"+
                 "\tComisión Anual: "+comision+"€";
     }
-
-    @Override
-    public byte[] serialize() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ContaBancariaCorrentePersoal unserialize(byte[] bytes) throws ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

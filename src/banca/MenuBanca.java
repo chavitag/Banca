@@ -1,11 +1,20 @@
 package banca;
 
+import banca.entities.Cliente;
+import banca.entities.ContaBancariaCorrentePersoal;
+import banca.entities.ContaBancariaCorrenteEmpresa;
+import banca.entities.ContaBancariaAforro;
+import banca.entities.ContaBancariaCorrente;
+import banca.entities.ContaBancaria;
 import banca.data.BancaBy;
 import Utils.Menu;
 import Utils.Utilidades;
 import java.util.Calendar;
 import java.util.Collection;
 
+/**
+ * Menú Principal.
+ */
 public class MenuBanca extends Menu {
     
     public MenuBanca() {
