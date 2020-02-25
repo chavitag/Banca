@@ -8,8 +8,6 @@ import java.util.Scanner;
 
 /**
  * Utilidades de entrada de datos e visualización
- * @author Javier Taboada
- * @author xavitag.es
  * @version 1.0
  * @since 1.0
 */
@@ -82,6 +80,12 @@ public class Utilidades {
         return getString();
     }
     
+    /**
+     * Lee unha data do teclado
+     * @param txt - Mensaxe a visualizar
+     * @return Obxecto Calendar representando a data introducida
+     * @throws Exception A data introducida non é correcta
+     */
     public static Calendar getData(String txt) throws Exception {
         SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
         Date date;
@@ -98,6 +102,11 @@ public class Utilidades {
         return cal;
     }
 
+    /**
+     * Devolve un obxecto Calendar representando unha data en forma de String.
+     * @param c
+     * @return 
+     */
     public static String strData(Calendar c) {
         SimpleDateFormat format=new SimpleDateFormat("dd-MM-yyyy");
         return format.format(c.getTime());
@@ -152,7 +161,13 @@ public class Utilidades {
         return getDouble();
     }
     
-    
+    /**
+     * Permite elexir entre varias opcións expresadas nunha mensaxe. Con * sempre
+     * se pode cancelar a entrada.
+     * @param msg Mensaxe a visualizar
+     * @param validas Caracteres válidos que sirven como resposta
+     * @return  Caracter introducido
+     */
     public static char choose(String msg,String validas) {
         char letra=0;
         char[] l;
