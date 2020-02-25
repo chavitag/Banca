@@ -1,11 +1,8 @@
 package storage.randomaccessfile;
 
 import java.io.IOException;
-import java.io.Serializable;
 // Cambiando o Serializator, cambia o xeito de almacenar....
 import Utils.serializators.objectstream.Serializator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import storage.Gardable;
 
 /**
@@ -14,7 +11,7 @@ import storage.Gardable;
  * @param <K>
  * @param <T>
  */
-public abstract class RandomAccessFileSerializeDataStore <K,T extends Serializable & Gardable<K,T>> 
+public abstract class RandomAccessFileSerializeDataStore <K,T extends Gardable<K,T>> 
             extends RandomAccessFileDataStore <K,T> {
         
     public RandomAccessFileSerializeDataStore(String filename) {

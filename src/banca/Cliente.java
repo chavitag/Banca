@@ -4,7 +4,6 @@ import Utils.Utilidades;
 import Utils.TypesSerializator;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Collection;
 import storage.Gardable;
@@ -13,7 +12,7 @@ import storage.Gardable;
  *
  * @author xavi
  */
-public class Cliente implements Serializable,Gardable <String,Cliente> {
+public class Cliente implements Gardable <String,Cliente> {
     private String dni;     // 9 Chars
     private String nome;    // 20 Chars max
     private String apelidos;    // 50 Chars max
