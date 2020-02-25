@@ -43,7 +43,4 @@ public abstract class HashMapDataStore <K,T extends Gardable<K,T>> implements Da
     public T load(K info) {
         return lista.get(info);
     }
-    
-    @Override
-    public void closeDataStore() {}
 }
