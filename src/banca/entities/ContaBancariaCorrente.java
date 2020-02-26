@@ -31,15 +31,14 @@ public abstract class ContaBancariaCorrente extends ContaBancaria {
     }
     
     /**
-     * Domicilia un recibo na conta corrente. A entidade debe estar autorizada.
+     * Domicilia un recibo na conta corrente.A entidade debe estar autorizada.
      * @param codigoentidad - Código de entidade
      * @param codigodomiciliacion - Código de domiciliacion
      * @param concepto - Concepto de domiciliacion
-     * @throws Exception - Erro ao domiciliar, a entidade non está autorizada
      */
-    public void domicilia(String codigoentidad,String codigodomiciliacion,String concepto) throws Exception {
+    public void domicilia(String codigoentidad,String codigodomiciliacion,String concepto)  {
         Autorizacion aut=listaAutorizados.get(codigoentidad);
-        if (aut==null) throw new Exception("A entidade non está autorizada");
+        if (aut==null) throw new IllegalArgumentException("A entidade non está autorizada");
         aut.domicilia(codigodomiciliacion, concepto);
     }
     

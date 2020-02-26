@@ -54,15 +54,15 @@ public class ContaBancariaCorrenteEmpresa extends ContaBancariaCorrente {
     /**
      * @return the tipo
      */
-    public double getTipod() {
+    public double getTipo() {
         return tipo*100;
     }
 
     /**
      * @param tipod the tipo to set
      */
-    public void setTipod(double tipod) {
-        this.tipo = tipod/100;
+    public void setTipo(double tipod) {
+        this.tipo = tipo/100;
     }
 
     /**
@@ -121,6 +121,6 @@ public class ContaBancariaCorrenteEmpresa extends ContaBancariaCorrente {
                 "\nDatos da Conta:\n\t"+super.toString()+": \n"+
                 "\tMáximo Descuberto: "+descuberto+"€"+
                 "\tComisión Descuberto: "+comision+"€"+
-                "\tTipo de Interés Descuberto: "+getTipod()+"%";
+                "\tTipo de Interés Descuberto: "+getTipo()+"%";
     }
 }

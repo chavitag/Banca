@@ -7,6 +7,9 @@ import storage.DataStore;
 import banca.data.hashmap.ClienteHashMapDataStore;
 import banca.data.hashmap.ContaHashMapDataStore;
 import banca.data.hashmap.EntidadHashMapDataStore;
+import banca.data.hashmap.randomaccessfile.ClienteRandomAccessFileHashMapDataStore;
+import banca.data.hashmap.randomaccessfile.ContaRandomAccessFileHashMapDataStore;
+import banca.data.hashmap.randomaccessfile.EntidadRandomAccessFileHashMapDataStore;
 import storage.DataStoreException;
 
 /**
@@ -50,14 +53,15 @@ import storage.DataStoreException;
  * serialización.
  * 
  * MODIFICACIONS NECESARIAS:
- *  Non convén chamar a métodos da clase que se podan sobrepoñer (non finais) dende un constructor,
- *  xa que potencialmente poden producirse problemas difíciles de atopar e solucionar. Isto se debe
- *  a que si chamamos a un método sobreposto en unha subclase, o método se executará ANTES de ter 
- *  construído o obxecto da subclase, e estaríamos executando un método dun obxecto sin construír.
+ * Non convén chamar a métodos da clase que se podan sobrepoñer (non finais) dende un constructor,
+ * xa que potencialmente poden producirse problemas difíciles de atopar e solucionar. Isto se debe
+ * a que si chamamos a un método sobreposto en unha subclase, o método se executará ANTES de ter 
+ * construído o obxecto da subclase, e estaríamos executando un método dun obxecto sin construír.
  * 
  * Para solucionar ese problema, incorporamos a DataStore o método openDataStore, que nos dará a 
  * oportunidade de realizar tarefas de inicialización delegadas ás subclases, como pode ser a
  * carga de datos dende un ficheiro. E a mesma misión que ten realmente closeDataStore...
+ * 
  * 
  * Respecto á propia carga dos obxectos podemos tomar dúas aproximacións: 
  * 
@@ -76,33 +80,40 @@ import storage.DataStoreException;
  * ESTA IMPLEMENTACIÓN UTILIZA A APROXIMACIÓN 2
  */
 public class AplicacionBanca {
+    // Nomes dos ficheiros. Necesarios si utilizamos almacenamento persistente en disco
     public static final String F_CLIENTES="clientes.dat";
     public static final String F_CONTAS="contas.dat";
     public static final String F_ENTIDADES="entidades.dat";
     
-    // DataStores para Clientes e Contas Bancarias. 
-    public static DataStore <String,ContaBancaria> CONTAS=new ContaHashMapDataStore ();
-    public static DataStore <String,Cliente> CLIENTS=new ClienteHashMapDataStore ();
-    public static DataStore <String,Entidad> ENTIDADES=new EntidadHashMapDataStore ();
+    // DataStores para Clientes e Contas Bancarias.
+    //
+    // Simplemente cambiando o tipo de DataStore cambia o xeito de almacenar os datos.
+    public static DataStore <String,ContaBancaria> CONTAS=new ContaRandomAccessFileHashMapDataStore ();
+    public static DataStore <String,Cliente> CLIENTS=new ClienteRandomAccessFileHashMapDataStore ();
+    public static DataStore <String,Entidad> ENTIDADES=new EntidadRandomAccessFileHashMapDataStore ();
     
     /**
      * Programa Principal
-     * @param args 
      */
     public static void main(String[] args) {
         try {
-            CONTAS.openDataStore();
+            // Teñen que abrirse neste orden, xa que para crear as contas deben estar
+            // cargados os HashMap de Clientes e Entidades
             CLIENTS.openDataStore();
             ENTIDADES.openDataStore();
+            CONTAS.openDataStore();
+
            /* Co try ... finally nos aseguramos de que pase o que pase se chama
             * aos métodos closeDataStore dos DataStore utilizados
             */
             try {
                 new MenuBanca().run();
             } finally {
-                CONTAS.closeDataStore();
+                // Convén pechar neste orden, xa que nos aseguramos que quedan
+                // gardados os HashMap de Clientes e Entidades que usan as contas
                 CLIENTS.closeDataStore();
                 ENTIDADES.closeDataStore();
+                CONTAS.closeDataStore();                
             }
         }   catch (DataStoreException ex) {
             System.out.println("ERROR: "+ex.getMessage());

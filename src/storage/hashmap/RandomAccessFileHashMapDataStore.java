@@ -24,7 +24,7 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
      * Constructor. 
      * @param filename - Nome do ficheiro
      */
-    RandomAccessFileHashMapDataStore(String filename)  {
+    public RandomAccessFileHashMapDataStore(String filename)  {
         // Non é necesario chamar a super(), porquee HashMapDataStore ten constructor por defecto
         this.filename=filename;
     }
@@ -33,9 +33,10 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
      * "openDataStore", aproveitamos para cargar os datos do ficheiro no HashMap.
      * @throws DataStoreException 
      */
+    @Override
     public void openDataStore() throws DataStoreException {
         T object;
-                
+              
         open();
         try {
             do {
