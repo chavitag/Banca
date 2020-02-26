@@ -11,7 +11,7 @@ import storage.DataStoreException;
 
 /**
  * Aplicación Banca con almacenamento dos HashMap en RandomAccessFile ao inicio e ao final da aplicacion.
- * Aproximación sen modificar Cliente nin Entidade nin as ContaBancaria....
+ * Aproximación sen serialización nin modificar Cliente nin Entidade nin as ContaBancaria....
  * 
  * FUNCIONAMENTO:
  * 
@@ -29,8 +29,11 @@ import storage.DataStoreException;
  *  Deste xeito a información xa non será volátil.
  *  
  * VENTAXAS:
- *      - Simpleza
+ *      - Simpleza: Non nos temos que preocupar do tamaño dos rexistros, xa que cada vez
+ *      que saímos se gardan todos os datos de 0
+ * 
  * INCONVINTES:
+ *      - O número de contas manexables dependerá da RAM do sistema, xa que todo se garda en memoria
  *      - Si a aplicación non remata (porque se finaliza sin elexir "Saír") os datos se perden
  *      - Si temos moitos datos, tarda en cargar ao inicio e en gardar ao final.
  *      - Poden darse inconsistencias si falla a escritura de algún HashMap.
@@ -38,12 +41,12 @@ import storage.DataStoreException;
  * PROBLEMATICA:
  *  Necesitamos poder gardar os obxectos almacenados nos HasMap nos ficheiros. podemos tomar dúas 
  *  aproximacións:
+ * 
  *  a)  "Serializar" os obxectos que queremos gardar. A "Serialización" consiste en transformar os obxectos en bytes
  *  de xeito que se poda reconstruir o obxecto con posterioridade a partir dos mesmos.
  * 
  *  b)  Gardar os atributos dos obxectos un a un, e logo ao recuperalos reconstruír o obxecto. Isto é posible 
  *  gracias a que RandomAccessFile ten métodos apropiados para gardar todos os tipos primitivos, e String.
- * 
  * 
  * Esta implementación utilizará os métodos de RandomAccessFile para gardar os atributos dos
  * obxectos e reconstruílos, pero se deseñará de modo que sexa moi simple cambiar e facelo mediante
