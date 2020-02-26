@@ -97,7 +97,8 @@ public abstract class RandomAccessFileHashMapDataStore <K,T extends Gardable<K>>
             throw new DataStoreException(e.getMessage());
         }
     }
-        
+       
+    // Estes métodos deben encargarse de ler e escribir un obxecto da clase T no RandomAccessFile ras
     protected abstract T readObject() throws IOException;
     protected abstract void writeObject(T object) throws IOException;
     

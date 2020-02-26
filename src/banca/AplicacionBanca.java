@@ -4,9 +4,6 @@ import banca.entities.Cliente;
 import banca.entities.ContaBancaria;
 import banca.entities.Entidad;
 import storage.DataStore;
-import banca.data.hashmap.ClienteHashMapDataStore;
-import banca.data.hashmap.ContaHashMapDataStore;
-import banca.data.hashmap.EntidadHashMapDataStore;
 import banca.data.hashmap.randomaccessfile.ClienteRandomAccessFileHashMapDataStore;
 import banca.data.hashmap.randomaccessfile.ContaRandomAccessFileHashMapDataStore;
 import banca.data.hashmap.randomaccessfile.EntidadRandomAccessFileHashMapDataStore;
@@ -62,6 +59,7 @@ import storage.DataStoreException;
  * oportunidade de realizar tarefas de inicialización delegadas ás subclases, como pode ser a
  * carga de datos dende un ficheiro. E a mesma misión que ten realmente closeDataStore...
  * 
+ * NINGUNHA destas modificacións afecta a funcionalidade da aplicación con outros DataStore
  * 
  * Respecto á propia carga dos obxectos podemos tomar dúas aproximacións: 
  * 
@@ -78,6 +76,23 @@ import storage.DataStoreException;
  * 
  * 
  * ESTA IMPLEMENTACIÓN UTILIZA A APROXIMACIÓN 2
+ * 
+ *  --> Clases Implementadas
+ *          banca.data.ObjectType
+ *              --> Enum cos distintos tipos de Obxectos, para poder saber o que se está a ler
+ *          storage.hashmap.RandomAccessFileHashMapDataStore
+ *              --> HashMapDataStore con persistencia en RandomAccessFile
+ *          banca.data.hashmap.randomaccessfile.ClienteRandomAccessFileHashMapDataStore
+ *              --> HashMapDataStore con persistencia para Clientes
+ *          banca.data.hashmap.randomaccessfile.ContaRandomAccessFileHashMapDataStore
+ *              --> HashMapDataStore con persistencia para Contas
+ *          banca.data.hashmap.randomaccessfile.EntidadRandomAccessFileHashMapDataStore
+ *              --> HashMapDataStore con persistencia para Entidades
+ * 
+ *  --> Modificacións
+ *      En AplicacionBanca 
+ *          creación das constantes F_CLIENTES, F_CONTAS, F_ENTIDADES
+ *          instanciación dos RandomAccessFileHashMapDataStore en lugar dos DataStore
  */
 public class AplicacionBanca {
     // Nomes dos ficheiros. Necesarios si utilizamos almacenamento persistente en disco
